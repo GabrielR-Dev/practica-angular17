@@ -1,0 +1,10 @@
+@if(pokemonList$ | async; as pokemonList){
+    <h1>Lista de Pokemons!</h1>
+    <br>
+    <br>
+    <br>
+    @for (item of pokemonList.results; track item.name) {
+        <p><b>{{item.name.toUpperCase()}}</b></p>
+        <p>Url: {{item.url}}</p>
+    }
+}
