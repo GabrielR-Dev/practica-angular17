@@ -31,4 +31,25 @@ export class AppComponent implements OnInit {
     this.pokemonList$ = this.pokemonService.getPokemonList(this.offset, this.limit);
   }
 
+  previous(){
+    //if(this.offset >= 0) return;
+
+    this.offset -= 20;
+    this.currentPage = this.offset / this.limit;
+    console.log(this.offset)
+
+    this.pokemonList$ = this.pokemonService.getPokemonList(this.offset, this.limit);
+
+  }
+  next(){
+    //if(this.offset >= 0) return;
+
+    this.offset += 20;
+    this.currentPage = this.offset / this.limit;
+    console.log(this.offset)
+
+    this.pokemonList$ = this.pokemonService.getPokemonList(this.offset, this.limit);
+
+  }
+
 }

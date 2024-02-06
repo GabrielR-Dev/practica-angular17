@@ -19,4 +19,8 @@ export class PokemonService {
     return this.http.get(url);
   }
 
+
+
+
+
 }
