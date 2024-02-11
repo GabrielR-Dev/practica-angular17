@@ -1,54 +1,68 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Route, Router, RouterOutlet } from '@angular/router';
 import { PokemonService } from './services/pokemon.service';
 import { Observable } from 'rxjs';
-import { PokemonList } from './models/pokemonList';
+import { PokemonList, Result } from './models/pokemonList';
 import { AsyncPipe } from '@angular/common';
+import { Pokemon } from './models/pokemon';
+import { PokemonComponent } from './component/pokemon/pokemon.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe],
+  imports: [RouterOutlet, AsyncPipe, PokemonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
 
   pokemonList$ = new Observable<PokemonList>();
+  pokemon$ = new Observable<Pokemon>();
+
   errorMessage = "";
-  offset = 0 ;
-  limit = 20;
+  offset = 0;
+  limit = 12;
   currentPage = 1;
 
 
-  constructor(private pokemonService : PokemonService){}
+  constructor(private pokemonService: PokemonService, private router : Router) { }
 
   ngOnInit(): void {
     this.getPokemonList();
   }
 
-  getPokemonList (){
+  getPokemonList() {
     this.pokemonList$ = this.pokemonService.getPokemonList(this.offset, this.limit);
+    console.log(this.pokemonList$);
   }
 
-  previous(){
-    //if(this.offset >= 0) return;
 
-    this.offset -= 20;
-    this.currentPage = this.offset / this.limit;
+  getDetailsPokemon(poke : Result){
+    this.pokemon$ = this.pokemonService.getPokemonByUrl(poke);
+    this.router.navigate(['detailsPokemon/', poke.name]);
+    
+    
+  }
+
+
+
+
+  previous() {
+    if (this.currentPage <= 0) {
+
+    } else {
+      this.offset -= this.limit;
+      this.pokemonList$ = this.pokemonService.getPokemonList(this.offset, this.limit);
+      this.currentPage = this.offset / this.limit;
+    }
+  }
+  next() {
+
+    this.offset += this.limit;
     console.log(this.offset)
 
     this.pokemonList$ = this.pokemonService.getPokemonList(this.offset, this.limit);
-
-  }
-  next(){
-    //if(this.offset >= 0) return;
-
-    this.offset += 20;
-    this.currentPage = this.offset / this.limit;
-    console.log(this.offset)
-
-    this.pokemonList$ = this.pokemonService.getPokemonList(this.offset, this.limit);
+    this.currentPage =this.offset / this.limit;
 
   }
 

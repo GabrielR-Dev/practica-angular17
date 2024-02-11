@@ -1,14 +1,27 @@
-@if(pokemonList$ | async; as pokemonList){
-    <h1>Lista de Pokemons!</h1>
-    <br>
-    <br>
-    <br>
-    @for (item of pokemonList.results; track item.name) {
-        <p><b>{{item.name.toUpperCase()}}</b></p>
-        <p>Url: {{item.url}}</p>
-    }
+<h1>Lista de Pokemons!</h1>
+<div class="content">
+    <div class="content-pokemons">
 
-    <div class="paginacion">
-        <button (click)="previous()">previus</button>      <button (click)="next()">next</button>
+        <div class="list-pokemons">
+
+            @if(pokemonList$ | async; as pokemonList){
+            @for (item of pokemonList.results; track item.name) {
+            <div class="item">
+                <p><b>{{item.name.toUpperCase()}}</b></p>
+                <button (click)="getDetailsPokemon(item)">Ver Detalles</button>
+            </div>
+            }
+            }
+
+        </div>
+        <div class="paginacion">
+            <button (click)="previous()">previus</button>
+            <p>{{currentPage}}</p><button (click)="next()">next</button>
+        </div>
+
     </div>
-}
+
+    <div class="details-pokemon">
+        <router-outlet />
+    </div>
+</div>

@@ -1,0 +1,33 @@
+h1 {
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+}
+.content .content-pokemons {
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+}
+.content .content-pokemons .list-pokemons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.content .content-pokemons .list-pokemons .item {
+  background-color: sandybrown;
+  margin: 10px;
+  border: 2px solid black;
+}
+.content .content-pokemons .paginacion {
+  position: relative;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.content .details-pokemon {
+  width: 40%;
+  background-color: bisque;
+}/*# sourceMappingURL=app.component.css.map */
