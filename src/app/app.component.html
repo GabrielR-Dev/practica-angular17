@@ -22,6 +22,12 @@
     </div>
 
     <div class="details-pokemon">
-        <router-outlet />
+        @if (pokemon$ | async; as pokemon) {
+            <app-pokemon [datos] = pokemon>
+                
+            </app-pokemon>
+            
+        }
+
     </div>
 </div>

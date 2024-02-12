@@ -14,7 +14,10 @@ order: number;
 past_abilities: any[];
 past_types: any[];
 species : {};
-sprites : {};
+sprites : {
+    front_default:string;
+
+};
 stats : any[];
 types : any[];
 weight:number;

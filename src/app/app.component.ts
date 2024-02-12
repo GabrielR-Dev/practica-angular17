@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Route, Router, RouterOutlet } from '@angular/router';
 import { PokemonService } from './services/pokemon.service';
-import { Observable } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { PokemonList, Result } from './models/pokemonList';
 import { AsyncPipe } from '@angular/common';
 import { Pokemon } from './models/pokemon';
@@ -16,7 +16,7 @@ import { PokemonComponent } from './component/pokemon/pokemon.component';
 })
 export class AppComponent implements OnInit {
 
-  pokemonList$ = new Observable<PokemonList>();
+  pokemonList$! : Observable<PokemonList>;
   pokemon$ = new Observable<Pokemon>();
 
   errorMessage = "";
@@ -38,7 +38,9 @@ export class AppComponent implements OnInit {
 
 
   getDetailsPokemon(poke : Result){
-    this.pokemon$ = this.pokemonService.getPokemonByUrl(poke);
+    this.pokemon$ = this.pokemonService.getPokemonByUrl(poke).pipe(map(res => {
+      console.log(res); return res
+    }))
     this.router.navigate(['detailsPokemon/', poke.name]);
     
     

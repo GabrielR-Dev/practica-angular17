@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"pokemon.component.css"}
+{"version":3,"sources":["pokemon.component.scss","pokemon.component.css"],"names":[],"mappings":"AAAA;EAEI,kBAAA;ACAJ;ADEI;EACI,WAAA;EACA,YAAA;ACAR;ADEQ;EACI,UAAA;EACA,WAAA;ACAZ","file":"pokemon.component.css"}
