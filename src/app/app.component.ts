@@ -50,12 +50,15 @@ export class AppComponent implements OnInit {
 
 
   previous() {
-    if (this.currentPage <= 0) {
+    this.currentPage -= 1;
+
+    if (this.currentPage == 0) {
+      this.currentPage = 1;
 
     } else {
       this.offset -= this.limit;
       this.pokemonList$ = this.pokemonService.getPokemonList(this.offset, this.limit);
-      this.currentPage = this.offset / this.limit;
+      //this.currentPage = this.offset / this.limit;
     }
   }
   next() {
@@ -64,7 +67,8 @@ export class AppComponent implements OnInit {
     console.log(this.offset)
 
     this.pokemonList$ = this.pokemonService.getPokemonList(this.offset, this.limit);
-    this.currentPage =this.offset / this.limit;
+    //this.currentPage =this.offset / this.limit;
+    this.currentPage += 1;
 
   }
 
